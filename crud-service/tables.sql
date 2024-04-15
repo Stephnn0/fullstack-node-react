@@ -9,6 +9,16 @@ CREATE TABLE customers (
          address VARCHAR(255)
      );
 
+CREATE TABLE users (
+         id VARCHAR(50) PRIMARY KEY,
+         email VARCHAR(50) NOT NULL,
+         password VARCHAR(50) NOT NULL,
+         first_name VARCHAR(50),
+         last_name VARCHAR(50),
+         refreshToken VARCHAR(20),
+         role VARCHAR(255)
+);
+
 CREATE TABLE orders (
   orderId INT PRIMARY KEY,
   subtotal DECIMAL(10, 2),
