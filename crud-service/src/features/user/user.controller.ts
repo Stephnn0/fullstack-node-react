@@ -1,8 +1,10 @@
 import { SuccessOk } from "../../shared/response/success/success.response";
 import { UserService } from "./user.service";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jsonwebtoken from "jsonwebtoken"
+import Http500Error from "../../error/errors/h500Error";
+import Http400Error from "../../error/errors/h400Error";
 
 class UserController {
     userService: UserService;
@@ -71,7 +73,8 @@ class UserController {
 
 
 
-    login = async (request: Request, response: Response) => {     
+    login = async (request: Request, response: Response) => { 
+
         try {
             const { email, password } = request.body;
             const userData = { email, password }; 
@@ -128,13 +131,15 @@ class UserController {
     }
 
 
-    register = async (request: Request, response: Response) => {   
+    register = async (request: Request, response: Response, next: NextFunction) => {   
 
         try {
             const { email, password } = request.body;
 
             if (!email || !password) {
-                return response.status(400).json({ message: 'Email and password are required.' });
+                next(new Http400Error());
+
+                // return response.status(400).json({ message: 'Email and password are required.' });
             }
 
             //check is valid email
@@ -153,7 +158,8 @@ class UserController {
 
         } catch(err){
             console.log(err)
-            response.status(500).json({ message: 'Internal server error' });
+            next(new Http500Error());
+            // response.status(500).json({ message: 'Internal server error' });
 
         }
     }

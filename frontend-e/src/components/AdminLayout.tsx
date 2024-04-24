@@ -4,6 +4,7 @@ import InventoryIcon from "@mui/icons-material/Inventory";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import PersonIcon from "@mui/icons-material/Person";
 import useLogout from "../auth/useLogout";
+import StoreIcon from "@mui/icons-material/Store";
 const AdminLayout = () => {
   const logout = useLogout();
 
@@ -51,6 +52,13 @@ const AdminLayout = () => {
           >
             <PersonIcon className="mr-2" />
             Customers
+          </Link>
+          <Link
+            to="/cms"
+            className="flex items-center py-2 px-4 rounded-md mb-2 text-sm hover:bg-gray-100"
+          >
+            <StoreIcon className="mr-2" />
+            Online Store
           </Link>
         </div>
       </aside>

@@ -10,6 +10,7 @@ const stripe_route_1 = require("./stripe/stripe.route");
 const order_route_1 = require("./features/order/order.route");
 const analytics_route_1 = require("./features/analytics/analytics.route");
 const address_router_1 = require("./features/address/address.router");
+const pages_route_1 = require("./features/pages/pages.route");
 const appModuleRoute = (app) => {
     const moduleRoute = () => [
         new health_route_1.HealthCheckRoute(),
@@ -19,7 +20,8 @@ const appModuleRoute = (app) => {
         new stripe_route_1.StripeRoute(),
         new order_route_1.OrderRoute(),
         new analytics_route_1.AnalyticsRoute(),
-        new address_router_1.AddressRoute()
+        new address_router_1.AddressRoute(),
+        new pages_route_1.PageRoute()
     ];
     moduleRoute().forEach((appRoute) => {
         app.use("/api", appRoute.router);

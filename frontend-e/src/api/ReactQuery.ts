@@ -66,8 +66,29 @@ export const fetchProductByCategory = async (category: string): Promise<Product[
   }
 };
 
+// login admin
+
+
+export const adminLogin = async (formData: any) => {
+  try {
+    const response = await axios.post(
+      `${baseURL}/auth/login`,
+      formData,
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+    );
+
+    return response.data;
+  } catch (error) {
+    throw new Error("Error creating address");
+  }
+};
+
 
 // address
+
 
 export const createAddress = async (token: any, formData: any) => {
   try {

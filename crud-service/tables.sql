@@ -42,3 +42,14 @@ CREATE TABLE orderitem (
 );
 
 
+
+
+CREATE TABLE Pages (
+    id VARCHAR(255) PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    color VARCHAR(50) NOT NULL
+);
+
+
+INSERT INTO Pages (id, title, color) VALUES ('djjfhjdfjhh443jkfjfk', 'Homepage', 'white');
+

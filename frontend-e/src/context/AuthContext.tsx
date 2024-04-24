@@ -23,6 +23,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     accessToken: null,
   });
 
+  console.log(accessToken, "accessToken from auth context");
+
   const setAccessToken = (token: string | null) => {
     setAuthData((prevAuthData) => ({
       ...prevAuthData,

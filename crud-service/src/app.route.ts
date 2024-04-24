@@ -8,6 +8,7 @@ import { StripeRoute } from "./stripe/stripe.route";
 import { OrderRoute } from "./features/order/order.route";
 import { AnalyticsRoute } from "./features/analytics/analytics.route";
 import { AddressRoute } from "./features/address/address.router";
+import { PageRoute } from "./features/pages/pages.route";
 
 
 
@@ -21,7 +22,8 @@ const appModuleRoute = (app: Application) => {
       new StripeRoute(),
       new OrderRoute(),
       new AnalyticsRoute(),
-      new AddressRoute()
+      new AddressRoute(),
+      new PageRoute()
     ];
 
     moduleRoute().forEach((appRoute) => {

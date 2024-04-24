@@ -8,6 +8,8 @@ const success_response_1 = require("../../shared/response/success/success.respon
 const user_service_1 = require("./user.service");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const h500Error_1 = __importDefault(require("../../error/errors/h500Error"));
+const h400Error_1 = __importDefault(require("../../error/errors/h400Error"));
 class UserController {
     constructor() {
         this.logout = async (request, response) => {
@@ -85,11 +87,11 @@ class UserController {
                 response.status(500).json({ message: 'Internal server error' });
             }
         };
-        this.register = async (request, response) => {
+        this.register = async (request, response, next) => {
             try {
                 const { email, password } = request.body;
                 if (!email || !password) {
-                    return response.status(400).json({ message: 'Email and password are required.' });
+                    next(new h400Error_1.default());
                 }
                 const hashedPwd = await bcrypt_1.default.hash(password, 10);
                 const userData = { email, password: hashedPwd };
@@ -99,7 +101,7 @@ class UserController {
             }
             catch (err) {
                 console.log(err);
-                response.status(500).json({ message: 'Internal server error' });
+                next(new h500Error_1.default());
             }
         };
         this.getUserByPhone = async (request, response) => {

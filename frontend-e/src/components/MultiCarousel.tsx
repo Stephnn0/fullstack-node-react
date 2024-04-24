@@ -12,6 +12,7 @@ interface Props {
 
 const MultiCardCarousel: React.FC<Props> = ({ category }) => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [isHovered, setIsHovered] = React.useState(false);
 
   const {
     data: productsCategory,
@@ -21,9 +22,7 @@ const MultiCardCarousel: React.FC<Props> = ({ category }) => {
     queryKey: [category],
     queryFn: () => fetchProductByCategory(category),
   });
-
   if (isLoading) return <CircularProgress />;
-
   if (error) return <p>Unknown Error</p>;
 
   const handleNext = () => {
@@ -36,8 +35,6 @@ const MultiCardCarousel: React.FC<Props> = ({ category }) => {
         (prevIndex - 1 + productsCategory!.length) % productsCategory!.length
     );
   };
-
-  const [isHovered, setIsHovered] = React.useState(false);
 
   // Calculate the width of each card dynamically based on the number of cards to show
   const cardWidth = `${100 / Math.min(productsCategory!.length, 4)}%`;
@@ -60,12 +57,12 @@ const MultiCardCarousel: React.FC<Props> = ({ category }) => {
             {productsCategory!.map((product: Product) => (
               <Link to={`/product/${product.id}`}>
                 <div
-                  className="flex-none p-5 bg-white shadow-md w-52"
+                  className="flex-none p-5 bg-white border border-gray-100  w-64"
                   // style={{ width: cardWidth }}
                   key={product.id}
                 >
                   <img
-                    className="w-full h-52 object-cover mb-4 "
+                    className="w-full h-64 object-cover mb-4 "
                     src={product.imgUrl}
                     alt="Card"
                   />

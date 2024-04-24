@@ -20,6 +20,9 @@ import ContactPage from "./pages/ContactPage";
 import AboutPage from "./pages/AboutPage";
 import SingleProductPage from "./pages/SingleProductPage";
 import CartPage from "./pages/CartPage";
+import CmsPage from "./cms/CmsPage";
+import CmsLayout from "./cms/CmsLayout";
+import Builder from "./cms/Builder";
 
 function App() {
   return (
@@ -47,8 +50,12 @@ function App() {
           <Route element={<RequireAuth />}>
             <Route element={<AdminLayout />}>
               <Route path="dashboard" element={<Dashboard />} />
+              <Route path="cms" element={<CmsPage />} />
               <Route path="admin/products" element={<ProductsPage />} />
               <Route path="admin/products/create" element={<AddProduct />} />
+            </Route>
+            <Route element={<CmsLayout />}>
+              <Route path="builder" element={<Builder />} />
             </Route>
           </Route>
           <Route path="unauth" element={<UnAuthenticated />} />
